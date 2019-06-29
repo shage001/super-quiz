@@ -5,6 +5,7 @@ import './index.css';
 // https://community.ibm.com/community/user/imwuc/blogs/tiago-moura/2018/07/17/5-min-deployment-react-web-app-running-on-ibmcloud
 
 const quizServiceURL = 'https://us-south.functions.cloud.ibm.com/api/v1/web/samhage%40ibm.com_dev/default/Super%20Quiz.json';
+const buttonMessageMap = {'give-up': 'Give up?', 'correct': 'Correct!', 'incorrect': 'Incorrect.'};
 
 
 class Textbox extends React.Component {
@@ -35,9 +36,10 @@ class Game extends React.Component {
             answers: [],
             scoring: [],
             curQuestion: 0,
-            numQuestions: 0,
+            numQuestions: -1,  // avoid showing score before game has loaded
             input: '',
             score: 0,
+            buttonDisplay: 'give-up',  // 'give-up', 'correct', 'incorrect'
         };
     }
 
@@ -54,6 +56,7 @@ class Game extends React.Component {
                 questions: res.questions,
                 answers: res.answers,
                 scoring: res.scoring,
+                curQuestion: 0,
                 numQuestions: res.questions.length,
                 input: '',
                 showAnswer: false,
@@ -79,12 +82,22 @@ class Game extends React.Component {
         if (this.state.input.toUpperCase().replace(/[.,/#!$%^&*;:{}=\-_`~()'"]/g, '') === this.state.answers[this.state.curQuestion].toUpperCase().replace(/[.,/#!$%^&*;:{}=\-_`~()'"]/g, '')) {  // Can I do better fuzzy matching here?
             this.setState({
                 score: this.state.score + this.state.questions[this.state.curQuestion].pointValue,
+                buttonDisplay: 'correct',
             });
         }
-        this.setState({
-            input: '',
-            curQuestion: this.state.curQuestion + 1,
-        });
+        else {
+            this.setState({
+                input: this.state.answers[this.state.curQuestion],
+                buttonDisplay: 'incorrect',
+            });
+        }
+        setTimeout(() => {
+            this.setState({
+                input: '',
+                curQuestion: this.state.curQuestion + 1,
+                buttonDisplay: 'give-up',
+            });
+        }, 1200);
     }
 
     handleGiveUp() {
@@ -114,7 +127,7 @@ class Game extends React.Component {
     render() {
         return (
             <div className="text-center">
-                <h1>Super Quiz</h1>
+                <h1>Isaac Asimov's Super Quiz</h1>
                 <div className="subject">
                     <h4>{this.state.subject}</h4>
                     <p>{this.state.subjectDetails}</p>
@@ -138,13 +151,13 @@ class Game extends React.Component {
                           onKeyPress={(e) => this.handleKeyPress(e)}
                         />
                         <div>
-                            <button className="give-up" onClick={() => this.handleGiveUp()}>
-                                Give up?
+                            <button className={`button ${this.state.buttonDisplay}`} onClick={() => this.handleGiveUp()}>
+                                {buttonMessageMap[this.state.buttonDisplay]}
                             </button>
                         </div>
                     </div>
                 }
-                {(this.state.curQuestion >= this.state.numQuestions) &&
+                {(this.state.curQuestion === this.state.numQuestions) &&
                     <div className="score-display">
                         <div className="score">Your score: {this.state.score}</div>
                         <div className="score-message">{this.state.scoring[this.state.score]}</div>

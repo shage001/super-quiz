@@ -7,6 +7,10 @@ body {
   padding: 0 25em;
 }
 
+.subject {
+  margin: 2em 0 0 0;
+}
+
 .level-wrapper {
   margin: 2em 0 0 0;
 }
@@ -26,6 +30,7 @@ body {
 
 .form-control1 {
   text-align: center;
+  font-size: 1.5em;
   margin: 2em 0 0 0;
   border: 0;
   outline: 0;
@@ -33,11 +38,8 @@ body {
   border-bottom: 2px solid black;
 }
 
-.give-up {
+.button {
   display: inline-block;
-  color: #003C5A;
-  border: 2px solid #003C5A;
-  /*font-size: 1em;*/
   font-weight: bold;
   margin: 2em 3em;
   padding: 1em 5em;
@@ -45,7 +47,24 @@ body {
   cursor: pointer;
 }
 
-.give-up:focus {
+.give-up {
+  border: 2px solid #003C5A;
+  color: #003C5A;
+}
+
+.correct {
+  color: #fff;
+  background-color: #3CC88C;
+  border: 2px solid #3CC88C;
+}
+
+.incorrect {
+  color: #fff;
+  background-color: #BC0026;
+  border: 2px solid #BC0026; 
+}
+
+.button:focus {
   outline: 0;
 }
 
@@ -58,4 +77,18 @@ body {
   color: #fff;
   background-color: #003C5A;
   box-shadow: inset 0 0 10px #333;
+}
+
+.score-display {
+  margin: 2em 0 0 0;
+}
+
+.score {
+  font-size: 2em;
+  color: #003C5A;
+}
+
+.score-message {
+  font-size: 2em;
+  color: #003C5A;
 }
