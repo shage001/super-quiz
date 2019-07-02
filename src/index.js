@@ -4,7 +4,7 @@ import './index.css';
 
 // https://community.ibm.com/community/user/imwuc/blogs/tiago-moura/2018/07/17/5-min-deployment-react-web-app-running-on-ibmcloud
 
-const quizServiceURL = 'https://us-south.functions.cloud.ibm.com/api/v1/web/samhage%40ibm.com_dev/default/Super%20Quiz.json';
+const quizServiceURL = 'https://us-south.functions.cloud.ibm.com/api/v1/web/samhage%40ibm.com_dev/default/Super%20Quiz%20Python.json';
 const buttonMessageMap = {'give-up': 'Give up?', 'correct': 'Correct!', 'incorrect': 'Incorrect.'};
 
 
@@ -79,7 +79,8 @@ class Game extends React.Component {
             return;
         }
         console.log(this.state);
-        if (this.state.input.toUpperCase().replace(/[.,/#!$%^&*;:{}=\-_`~()'"]/g, '') === this.state.answers[this.state.curQuestion].toUpperCase().replace(/[.,/#!$%^&*;:{}=\-_`~()'"]/g, '')) {  // Can I do better fuzzy matching here?
+        const userAnswer = this.state.input.toUpperCase().replace(/[.,/#!$%^&*;:{}=\-_`~'"]/g, '');
+        if (this.state.answers[this.state.curQuestion].includes(userAnswer)) {  // Can I do better fuzzy matching here?
             this.setState({
                 score: this.state.score + this.state.questions[this.state.curQuestion].pointValue,
                 buttonDisplay: 'correct',
