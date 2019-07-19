@@ -59,7 +59,6 @@ class Game extends React.Component {
                 curQuestion: 0,
                 numQuestions: res.questions.length,
                 input: '',
-                showAnswer: false,
             });
         });
     }
@@ -143,11 +142,6 @@ class Game extends React.Component {
                         <div className="question-wrapper">
                             <span className="question">{this.state.questions[this.state.curQuestion].question}</span>
                         </div>
-                        {this.state.showAnswer &&
-                            <div className="answer-wrapper">
-                                <span className="answer">{this.state.answers[this.state.curQuestion]}</span>
-                            </div>
-                        }
                         <Textbox
                           input={this.state.input}
                           onChange={(e) => this.handleChange(e)}
