@@ -80,7 +80,9 @@ class Game extends React.Component {
         }
         console.log(this.state);
         const userAnswer = this.state.input.toUpperCase().replace(/[.,/#!$%^&*;:{}=\-_`~'"]/g, '');
-        if (this.state.answers[this.state.curQuestion].includes(userAnswer)) {  // Can I do better fuzzy matching here?
+        // Can I do better fuzzy matching here?
+        // Maybe send back lots more candidate answers?
+        if (this.state.answers[this.state.curQuestion].includes(userAnswer)) {
             this.setState({
                 score: this.state.score + this.state.questions[this.state.curQuestion].pointValue,
                 buttonDisplay: 'correct',
