@@ -4,7 +4,7 @@ import './index.css';
 
 // https://community.ibm.com/community/user/imwuc/blogs/tiago-moura/2018/07/17/5-min-deployment-react-web-app-running-on-ibmcloud
 
-const quizServiceURL = 'https://us-south.functions.cloud.ibm.com/api/v1/web/samhage%40ibm.com_dev/default/Super%20Quiz%20Python.json';
+const quizServiceURL = 'https://us-south.functions.cloud.ibm.com/api/v1/web/shage001%40gmail.com_dev/default/Super%20Quiz%20Python.json';
 const buttonMessageMap = {'give-up': 'Give up?', 'correct': 'Correct!', 'incorrect': 'Incorrect.'};
 
 
