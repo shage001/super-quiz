@@ -1,7 +1,9 @@
 ---
-path: build/
-memory: 64M
-instances: 1
-domain: mybluemix.net
-disk_quota: 1024M
-buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+applications:
+  - name: super-quiz
+    path: build/
+    memory: 64M
+    instances: 1
+    disk_quota: 1024M
+    buildpacks: 
+      - https://github.com/cloudfoundry/staticfile-buildpack.git
